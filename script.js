@@ -1,7 +1,14 @@
 const clickHere = document.querySelector(".click-here");
 let score = localStorage.getItem("score") || 0;
 document.querySelector(".score").innerHTML = score;
+// 	&#9773; серп и молот
+// &#9730; зонтик
+// &#9672; алмаз
+// 	&#9875; якорь
+// &#9883; атом
+let storeColors = ["#ffffff"];
 
+// куб
 clickHere.addEventListener("click", () => {
   clickHere.classList.toggle("ch-nondefault");
 
@@ -43,3 +50,14 @@ document.querySelector(".new-game-btn").addEventListener("click", () => {
     window.location.reload();
   }
 });
+
+// Магазин
+document.querySelector(".open-store-btn").addEventListener("click", () => {
+  document.querySelector(".store-wrap").classList.add("opened-store");
+});
+document.querySelector(".close-store-btn").addEventListener("click", () => {
+  document.querySelector(".store-wrap").classList.remove("opened-store");
+});
+
+// Внутри магаизна
+document.querySelector(".store-colors-btn").addEventListener("click", () => {});

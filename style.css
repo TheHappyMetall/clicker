@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+:root {
+  --color1: #eeeeee;
+  --color2: #00adb5;
+  --color3: rgba(57, 62, 70, 0.2);
+  --color4: #222831;
+  --ch-size: 20vw;
+}
+
+body {
+  height: 100svh;
+  display: grid;
+  place-items: center;
+  grid-template-columns: auto var(--ch-size) auto;
+  grid-template-rows: auto var(--ch-size) auto;
+  background: var(--color4);
+  color: var(--color1);
+  font-family: "Comfortaa", sans-serif;
+  font-size: 24px;
+}
+
+.score {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.click-here {
+  position: relative;
+  width: var(--ch-size);
+  border: 3px solid var(--color2);
+  background: var(--color3);
+  transition: 100ms;
+  border-radius: 25% 5% 25%;
+  cursor: pointer;
+  grid-column: 2;
+  grid-row: 2;
+  box-shadow: 3px 3px 15px var(--color2);
+}
+
+.ch-nondefault {
+  border-radius: 5% 25% 5%;
+}
+
+.click-here:active {
+  background-color: rgba(57, 62, 70, 0.3);
+  border: dashed var(--color2);
+  border-radius: 25%;
+}
+
+.click-here::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+@media screen and (max-width: 1100px) {
+  :root {
+    --ch-size: 40vw;
+  }
+}

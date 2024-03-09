@@ -13,7 +13,11 @@
   --color2: #00adb5;
   --color3: rgba(57, 62, 70, 0.2);
   --color4: #222831;
+  --modalbgcol: rgba(0, 0, 0, 0.6);
+  --modalboxbgcol: rgba(34, 40, 49, 0.8);
   --ch-size: 20vw;
+
+  --chanim-action-col: #ff7600;
 }
 
 body {
@@ -60,6 +64,17 @@ body {
   content: "";
   display: block;
   padding-bottom: 100%;
+}
+
+.click-here-action {
+  animation: action 1.5s ease-in;
+}
+
+@keyframes action {
+  50% {
+    border: 3px solid var(--chanim-action-col);
+    background-color: rgba(57, 62, 70, 1);
+  }
 }
 
 /* menu */
@@ -166,10 +181,121 @@ body {
   color: var(--color2);
 }
 
-/* Store buy color */
+/* Modal */
+.modal-wrapper {
+  position: fixed;
+  transition: 0.3s;
+  display: none;
+}
+
+.modal-open {
+  display: block;
+}
+
+.modal-cont {
+  height: 100svh;
+  width: 100svw;
+  background-color: var(--modalbgcol);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: var(--modalboxbgcol);
+  border: 2px solid var(--color2);
+  border-radius: 15px;
+  box-shadow: 0 0 10px var(--color2);
+  padding: 25px;
+  width: 90svw;
+  height: 90svh;
+}
+
+.modal-text {
+  font-size: 20px;
+  padding-bottom: 25px;
+  word-wrap: break-word;
+  text-align: center;
+  height: 100%;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: end;
+}
+
+.modal-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+
+  border: 2px solid var(--color2);
+  border-radius: 7px;
+  box-shadow: 0 0 10px var(--color2);
+  cursor: pointer;
+  transition: ease-in 0.4s;
+  background: var(--modalbgcol);
+}
+
+.modal-btn:hover,
+.modal-btn:active {
+  border: 2px solid var(--chanim-action-col);
+  box-shadow: 0 0 10px var(--chanim-action-col);
+  color: var(--chanim-action-col);
+}
+
+/* In Color Store */
+.color-store-wrapper {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.color-store-item {
+  transition: ease-in 0.1s;
+  cursor: pointer;
+}
+
+.color-store-item:hover,
+.color-store-item:active {
+  scale: 0.95;
+}
+
+.color-store-color {
+  height: 100%;
+  width: 100%;
+}
+
+.color-store-selected {
+  opacity: 0.3;
+}
 
 @media screen and (max-width: 1100px) {
   :root {
     --ch-size: 40vw;
+  }
+
+  .modal-box {
+    /* width: 90svw;
+    height: 60svh; */
+    padding: 25px;
+  }
+
+  .modal-buttons {
+    justify-content: center;
+  }
+
+  .modal-btn {
+    width: 270px;
+    padding: 15px;
   }
 }

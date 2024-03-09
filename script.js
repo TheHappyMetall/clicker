@@ -6,7 +6,21 @@ document.querySelector(".score").innerHTML = score;
 // &#9672; алмаз
 // 	&#9875; якорь
 // &#9883; атом
-let storeColors = ["#ffffff"];
+
+let colorsInTheStore = JSON.parse(localStorage.getItem("colorsInTheStore")) || [
+  {
+    color: "rgb(0, 173, 181)",
+    isSelected: true,
+  },
+  {
+    color: "rgb(0, 55, 194)",
+    isSelected: false,
+  },
+  {
+    color: "rgb(0, 215, 14)",
+    isSelected: false,
+  },
+];
 
 // куб
 clickHere.addEventListener("click", () => {
@@ -16,24 +30,62 @@ clickHere.addEventListener("click", () => {
   document.querySelector(".score").innerHTML = score;
 
   switch (score) {
-    case 10:
-      alert("Первая десятка!");
+    case 0:
+      openModalDialog(
+        "Сообщение, содержащее частичку умопомрачительного сюжета..."
+      );
+      break;
+
+    case 5:
+      openModalDialog(
+        "Сообщение, содержащее частичку умопомрачительного сюжета..."
+      );
+      break;
+
+    case 15:
+      openModalDialog(
+        "Сообщение, содержащее частичку умопомрачительного сюжета..."
+      );
+      break;
+
+    case 20:
+      openModalDialog(
+        "Сообщение, содержащее частичку умопомрачительного сюжета..."
+      );
+      break;
+
+    case 30:
+      openModalDialog(
+        "Сообщение, содержащее частичку умопомрачительного сюжета..."
+      );
+      break;
+
+    case 45:
+      openModalDialog(
+        "Сообщение, содержащее частичку умопомрачительного сюжета..."
+      );
+      break;
+
+    case 47:
+      openModalDialog("Три...");
+      break;
+
+    case 48:
+      openModalDialog("Два...");
+      break;
+
+    case 49:
+      openModalDialog("Один...");
       break;
 
     case 50:
-      alert("Ничего себе! 50 очков!");
-      break;
-
-    case 100:
-      alert("Вау! Сотка!");
-      break;
-
-    case 500:
-      alert("Кто ты? 0.о ЭТО ЖЕ 500 ОЧКОВ!");
+      chAnimation("click-here-action");
+      clickHere.addEventListener("animationend", () => {
+        openModalDialog("...");
+      });
       break;
   }
 });
-// ссылка на новости где умерло столько челоек, сколько накликано
 
 // Меню
 document.querySelector(".open-menu-btn").addEventListener("click", () => {
@@ -60,4 +112,67 @@ document.querySelector(".close-store-btn").addEventListener("click", () => {
 });
 
 // Внутри магаизна
-document.querySelector(".store-colors-btn").addEventListener("click", () => {});
+document.querySelector(".store-colors-btn").addEventListener("click", () => {
+  openModalDialog(colorStoreCode());
+});
+
+// Покупка цветов
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("color-store-color")) {
+    colorsInTheStore.forEach((element) => {
+      // отмена всех выбранных цветов
+      if (element.isSelected === true) {
+        element.isSelected = false;
+      }
+      // выбор кликнутого цвета
+      if (e.target.style.backgroundColor === element.color) {
+        element.isSelected = true;
+      }
+      openModalDialog(colorStoreCode());
+
+      // использвание цвета, сохранение...
+    });
+  }
+});
+
+// CH Анимации
+function chAnimation(animName) {
+  clickHere.classList.add(`${animName}`);
+  clickHere.addEventListener("animationend", () => {
+    clickHere.classList.remove(`${animName}`);
+  });
+}
+
+// Модальное окно
+function openModalDialog(dialogText) {
+  if (!dialogText) {
+    return;
+  }
+  const modalWrapper = document.querySelector(".modal-wrapper");
+  const modalText = modalWrapper.querySelector(".modal-text");
+
+  modalText.innerHTML = dialogText;
+  modalWrapper.classList.add("modal-open");
+}
+
+document.querySelector(".modal-continue").addEventListener("click", (e) => {
+  setTimeout(() => {
+    document.querySelector(".modal-wrapper").classList.remove("modal-open");
+  }, 300);
+});
+
+// Шаблоны магазинов
+function colorStoreCode() {
+  let output = "";
+  colorsInTheStore.forEach((color) => {
+    output += `
+    <div class="color-store-item">
+      <div style="background: ${color.color}" class="color-store-color ${
+      color.isSelected ? "color-store-selected" : ""
+    }"></div>    
+    </div>`;
+  });
+  return `<div class="color-store-wrapper">${output}</div>`;
+}
+
+console.log();
